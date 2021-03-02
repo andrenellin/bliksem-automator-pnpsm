@@ -1,12 +1,17 @@
 <?php
-/*
-Plugin Name: Bliksem Automator
-Plugin URI: https://github.com/andrenellin/bliksem-automator
-Description: Adds functionality to Automator plugin
-Author: Andre Nell
-Version: 1.0
-Author URI: https://www.andrenell.me
-*/
+/**
+ * Plugin Name: Bliksem Automator
+ * Version: 1.0.0
+ * Plugin URI: https://github.com/andrenellin/bliksem-automator
+ * Description: Adds functionality to Automator plugin
+ * Author: Andre Nell
+ * Author URI: http://www.andrenell.me/
+ *
+ *
+ * @package WordPress
+ * @author Andre Nell
+ * @since 1.0.0
+ */
 
 /*
  * Includes
