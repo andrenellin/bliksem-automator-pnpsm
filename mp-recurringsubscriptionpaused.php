@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Memberpress recurring subscription paused
+Plugin Name: BS-Automator Memberpress recurring subscription paused
 Plugin URI: https://github.com/andrenellin/bliksem-automator/mp-recurringsubscriptionpaused.php
 Description: Adds Memberpress Subscription Paused to automator
 Author: Andre Nell
