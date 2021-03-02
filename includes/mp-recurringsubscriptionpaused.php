@@ -23,7 +23,7 @@ function uncanny_automator_triggers_mepr_subscription_paused()
         'support_link' => 'https://github.com/andrenellin',
         'integration' => 'MP',
         'code' => 'PAUSEPRODUCTRECURRING',
-        'sentence' => sprintf(__('A user pauses {{a recurring subscription product:%1$s}}', 'uncanny-automator'), 'MPPRODUCT'),
+        'sentence' => sprintf(esc_attr__('A user pauses {{a recurring subscription product:%1$s}}', 'uncanny-automator'), 'MPPRODUCT'),
         'select_option_name' => __('A user pauses {{a recurring subscription product:%1$s}}', 'uncanny-automator'),
         'action' => 'mepr-event-subscription-paused',
         'priority' => 20,
@@ -31,8 +31,6 @@ function uncanny_automator_triggers_mepr_subscription_paused()
         'validation_function' => 'mp_product_paused',
         'options' => [
             $uncanny_automator->helpers->recipe->memberpress->options->all_memberpress_products_recurring(null, 'MPPRODUCT', ['uo_include_any' => true]),
-
-            $uncanny_automator->options->number_of_times(),
         ],
     );
 
