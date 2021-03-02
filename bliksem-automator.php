@@ -19,5 +19,4 @@
  *
  */
 
-
-include_once dirname( __FILE__ ) . '/includes/mp-recurringsubscriptionpaused.php';
+include_once dirname(__FILE__) . '/includes/mp-recurringsubscriptionpaused.php';
