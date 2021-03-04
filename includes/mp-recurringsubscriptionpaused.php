@@ -1,17 +1,8 @@
 <?php
-/*
- * Adding a trigger for Memberpress Subscription Paused
- * =========
- *
- */
-
-/* SECTION 2 - PART A */
-// Add trigger during the "uncanny_automator_add_integration_triggers_actions_tokens" do_action()
+# Hook into Uncanny Automator triggers
 add_action('uncanny_automator_add_integration_triggers_actions_tokens', 'uncanny_automator_triggers_mepr_subscription_paused');
 
-/**
- * Define and register the trigger by pushing it into the Automator object
- */
+#Push the trigger into the Automator Object
 function uncanny_automator_triggers_mepr_subscription_paused()
 {
     global $uncanny_automator;
@@ -33,6 +24,7 @@ function uncanny_automator_triggers_mepr_subscription_paused()
         ],
     );
 
+    # Register the Trigger
     $uncanny_automator->register_trigger($trigger);
 
     return;
@@ -46,20 +38,26 @@ function mp_product_paused(\MeprEvent $event)
     global $uncanny_automator;
 
     /** @var \MeprTransaction $transaction */
+    // ### The transaction event contains all data needed to verify trigger and action.
     $transaction = $event->get_data();
+
     /** @var \MeprProduct $product */
     $product = $transaction->product();
-    $product_id = $product->ID;
+    $product_id = $product->ID; // This is the membership id number
     $user_id = absint($transaction->user()->ID);
     if ('lifetime' === (string) $product->period_type) {
         return;
     }
 
+    // Fetches available recipes for the trigger
     $recipes = $uncanny_automator->get->recipes_from_trigger_code('MPPRODUCT');
     if (empty($recipes)) {
         return;
     }
+
+    // Fetches meta for recipes
     $required_product = $uncanny_automator->get->meta_from_recipes($recipes, 'MPPRODUCT');
+    
     $matched_recipe_ids = array();
     //Add where option is set to Any product
     foreach ($recipes as $recipe_id => $recipe) {
