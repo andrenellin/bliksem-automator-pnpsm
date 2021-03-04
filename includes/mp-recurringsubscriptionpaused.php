@@ -14,7 +14,6 @@ add_action('uncanny_automator_add_integration_triggers_actions_tokens', 'uncanny
  */
 function uncanny_automator_triggers_mepr_subscription_paused()
 {
-
     global $uncanny_automator;
 
     $trigger = array(
@@ -24,7 +23,7 @@ function uncanny_automator_triggers_mepr_subscription_paused()
         'integration' => 'MP',
         'code' => 'PAUSEPRODUCTRECURRING',
         'sentence' => sprintf(esc_attr__('A user pauses {{a recurring subscription product:%1$s}}', 'uncanny-automator'), 'MPPRODUCT'),
-        'select_option_name' => __('A user pauses {{a recurring subscription product:%1$s}}', 'uncanny-automator'),
+        'select_option_name' => __esc_attr('A user pauses {{a recurring subscription product}}', 'uncanny-automator'),
         'action' => 'mepr-event-subscription-paused',
         'priority' => 20,
         'accepted_args' => 1,
@@ -44,7 +43,6 @@ function uncanny_automator_triggers_mepr_subscription_paused()
  */
 function mp_product_paused(\MeprEvent $event)
 {
-
     global $uncanny_automator;
 
     /** @var \MeprTransaction $transaction */
