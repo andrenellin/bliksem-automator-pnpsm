@@ -19,9 +19,9 @@ function uncanny_automator_triggers_mepr_subscription_paused()
         'integration' => 'MP',
         'code' => 'PAUSEPRODUCTRECURRING',
         /* translators: Logged-in trigger - MemberPress */
-        'sentence' => sprintf(esc_attr__('A user pauses {{a recurring subscription product:%1$s}}', 'uncanny-automator'), $this->trigger_meta),
+        'sentence' => sprintf(esc_attr__('A user resumes {{a recurring subscription product:%1$s}}', 'uncanny-automator'), 'MPPRODUCT'),
         /* translators: Logged-in trigger - MemberPress */
-        'select_option_name' => esc_attr__('A user pauses {{a recurring subscription product}}', 'uncanny-automator'),
+        'select_option_name' => esc_attr__('A user resumes {{a recurring subscription product}}', 'uncanny-automator'),
         'action' => 'mepr-event-subscription-paused',
         'priority' => 20,
         'accepted_args' => 1,

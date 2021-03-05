@@ -10,9 +10,6 @@ add_action('uncanny_automator_add_integration_triggers_actions_tokens', 'uncanny
 #Push the trigger into the Automator Object
 function uncanny_automator_triggers_mepr_subscription_resumed()
 {
-    global $uncanny_automator;
-    global $trigger_meta
-
     $trigger = array(
 
         'author' => 'Bliksem LLC',
@@ -20,7 +17,7 @@ function uncanny_automator_triggers_mepr_subscription_resumed()
         'integration' => 'MP',
         'code' => 'RESUMEPRODUCTRECURRING',
         /* translators: Logged-in trigger - MemberPress */
-        'sentence' => sprintf(esc_attr__('A user resumes {{a recurring subscription product:%1$s}}', 'uncanny-automator'), $this->trigger_meta),
+        'sentence' => sprintf(esc_attr__('A user resumes {{a recurring subscription product:%1$s}}', 'uncanny-automator'), 'MPPRODUCT'),
         /* translators: Logged-in trigger - MemberPress */
         'select_option_name' => esc_attr__('A user resumes {{a recurring subscription product}}', 'uncanny-automator'),
         'action' => 'mepr-event-subscription-resumed',
