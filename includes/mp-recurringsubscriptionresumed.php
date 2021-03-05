@@ -1,14 +1,14 @@
 <?php
 /*
  * Hooks into Uncanny Automator to create a trigger for MemberPress
- * Trigger: Recurring Membership is paused
+ * Trigger: Recurring Membership is resumed
  * */
 
 # Hook into Uncanny Automator triggers
-add_action('uncanny_automator_add_integration_triggers_actions_tokens', 'uncanny_automator_triggers_mepr_subscription_paused');
+add_action('uncanny_automator_add_integration_triggers_actions_tokens', 'uncanny_automator_triggers_mepr_subscription_resumed');
 
 #Push the trigger into the Automator Object
-function uncanny_automator_triggers_mepr_subscription_paused()
+function uncanny_automator_triggers_mepr_subscription_resumed()
 {
     global $uncanny_automator;
 
@@ -17,13 +17,13 @@ function uncanny_automator_triggers_mepr_subscription_paused()
         'author' => 'Bliksem LLC',
         'support_link' => 'https://github.com/andrenellin',
         'integration' => 'MP',
-        'code' => 'PAUSEPRODUCTRECURRING',
-        'sentence' => sprintf(esc_attr__('A user pauses {{a recurring subscription product:%1$s}}', 'uncanny-automator'), 'MPPRODUCT'),
-        'select_option_name' => __esc_attr('A user pauses {{a recurring subscription product}}', 'uncanny-automator'),
-        'action' => 'mepr-event-subscription-paused',
+        'code' => 'RESUMEPRODUCTRECURRING',
+        'sentence' => sprintf(esc_attr__('A user resumes {{a recurring subscription product:%1$s}}', 'uncanny-automator'), 'MPPRODUCT'),
+        'select_option_name' => __esc_attr('A user resumes {{a recurring subscription product}}', 'uncanny-automator'),
+        'action' => 'mepr-event-subscription-pausedresumed',
         'priority' => 20,
         'accepted_args' => 1,
-        'validation_function' => 'mp_product_paused',
+        'validation_function' => 'mp_product_resumed',
         'options' => [
             $uncanny_automator->helpers->recipe->memberpress->options->all_memberpress_products_recurring(null, 'MPPRODUCT', ['uo_include_any' => true]),
         ],
@@ -38,13 +38,18 @@ function uncanny_automator_triggers_mepr_subscription_paused()
 /**
  * @param \MeprEvent $event
  */
-function mp_product_paused(\MeprEvent $event)
+function mp_product_resumed(\MeprEvent $event)
 {
     global $uncanny_automator;
 
     /** @var \MeprTransaction $transaction */
     // ### $transaction contains all subscription details
     $transaction = $event->get_data();
+
+    echo '<pre>';
+    echo '<h3>Check Output $transaction</h3>';
+    print_r($transaction);
+    </pre>
 
     /** @var \MeprProduct $product */
     // ### obtain product id from $transaction
@@ -56,7 +61,7 @@ function mp_product_paused(\MeprEvent $event)
     }
 
     // Fetches available recipes for the trigger
-    $recipes = $uncanny_automator->get->recipes_from_trigger_code('PAUSEPRODUCTRECURRING');
+    $recipes = $uncanny_automator->get->recipes_from_trigger_code('RESUMEPRODUCTRECURRING');
     if (empty($recipes)) {
         return;
     }
@@ -82,7 +87,7 @@ function mp_product_paused(\MeprEvent $event)
     }
     foreach ($matched_recipe_ids as $matched_recipe_id) {
         $recipe_args = [
-            'code' => 'PAUSEPRODUCTRECURRING',
+            'code' => 'RESUMEPRODUCTRECURRING',
             'meta' => 'MPPRODUCT',
             'user_id' => $user_id,
             'recipe_to_match' => $matched_recipe_id['recipe_id'],
