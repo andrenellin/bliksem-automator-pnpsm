@@ -10,6 +10,8 @@ add_action('uncanny_automator_add_integration_triggers_actions_tokens', 'uncanny
 #Push the trigger into the Automator Object
 function uncanny_automator_triggers_mepr_subscription_resumed()
 {
+    global $uncanny_automator;
+
     $trigger = array(
 
         'author' => 'Bliksem LLC',
