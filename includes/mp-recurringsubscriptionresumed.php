@@ -11,6 +11,7 @@ add_action('uncanny_automator_add_integration_triggers_actions_tokens', 'uncanny
 function uncanny_automator_triggers_mepr_subscription_resumed()
 {
     global $uncanny_automator;
+    global $trigger_meta
 
     $trigger = array(
 
@@ -18,9 +19,11 @@ function uncanny_automator_triggers_mepr_subscription_resumed()
         'support_link' => 'https://github.com/andrenellin',
         'integration' => 'MP',
         'code' => 'RESUMEPRODUCTRECURRING',
-        'sentence' => sprintf(esc_attr__('A user resumes {{a recurring subscription product:%1$s}}', 'uncanny-automator'), 'MPPRODUCT'),
-        'select_option_name' => __esc_attr('A user resumes {{a recurring subscription product}}', 'uncanny-automator'),
-        'action' => 'mepr-event-subscription-pausedresumed',
+        /* translators: Logged-in trigger - MemberPress */
+        'sentence' => sprintf(esc_attr__('A user resumes {{a recurring subscription product:%1$s}}', 'uncanny-automator'), $this->trigger_meta),
+        /* translators: Logged-in trigger - MemberPress */
+        'select_option_name' => esc_attr__('A user resumes {{a recurring subscription product}}', 'uncanny-automator'),
+        'action' => 'mepr-event-subscription-resumed',
         'priority' => 20,
         'accepted_args' => 1,
         'validation_function' => 'mp_product_resumed',
@@ -119,14 +122,4 @@ function mp_product_resumed(\MeprEvent $event)
             }
         }
     }
-}
-
-function bliksem_custom_logs($message)
-{
-    if (is_array($message)) {
-        $message = json_encode($message);
-    }
-    $file = fopen("../custom_logs.log", "a");
-    echo fwrite($file, "\n" . date('Y-m-d h:i:s') . " :: " . $message);
-    fclose($file);
 }
