@@ -50,6 +50,7 @@ function mp_product_resumed(\MeprEvent $event)
     // echo '<h3>Check Output $transaction</h3>';
     // print_r($transaction);
     // echo '</pre>';
+    // bliksem_custom_logs($array_value);
 
     /** @var \MeprProduct $product */
     // ### obtain product id from $transaction
@@ -118,4 +119,14 @@ function mp_product_resumed(\MeprEvent $event)
             }
         }
     }
+}
+
+function bliksem_custom_logs($message)
+{
+    if (is_array($message)) {
+        $message = json_encode($message);
+    }
+    $file = fopen("../custom_logs.log", "a");
+    echo fwrite($file, "\n" . date('Y-m-d h:i:s') . " :: " . $message);
+    fclose($file);
 }
