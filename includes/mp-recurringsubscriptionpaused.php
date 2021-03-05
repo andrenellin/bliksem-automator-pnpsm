@@ -38,12 +38,13 @@ function mp_product_paused(\MeprEvent $event)
     global $uncanny_automator;
 
     /** @var \MeprTransaction $transaction */
-    // ### The transaction event contains all data needed to verify trigger and action.
+    // ### $transaction contains all subscription details
     $transaction = $event->get_data();
 
     /** @var \MeprProduct $product */
+    // ### obtain product id from $transaction
     $product = $transaction->product();
-    $product_id = $product->ID; // This is the membership id number
+    $product_id = $product->ID; // 
     $user_id = absint($transaction->user()->ID);
     if ('lifetime' === (string) $product->period_type) {
         return;
