@@ -46,6 +46,11 @@ function mp_product_paused(\MeprEvent $event)
     // ### $transaction contains all subscription details
     $transaction = $event->get_data();
 
+    // echo '<pre>';
+    // echo '<h3>Check Output $transaction</h3>';
+    // print_r($transaction);
+    // echo '</pre>';
+
     /** @var \MeprProduct $product */
     // ### obtain product id from $transaction
     $product = $transaction->product();

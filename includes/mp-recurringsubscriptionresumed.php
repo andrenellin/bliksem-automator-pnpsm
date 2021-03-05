@@ -46,10 +46,10 @@ function mp_product_resumed(\MeprEvent $event)
     // ### $transaction contains all subscription details
     $transaction = $event->get_data();
 
-    echo '<pre>';
-    echo '<h3>Check Output $transaction</h3>';
-    print_r($transaction);
-    </pre>
+    // echo '<pre>';
+    // echo '<h3>Check Output $transaction</h3>';
+    // print_r($transaction);
+    // echo '</pre>';
 
     /** @var \MeprProduct $product */
     // ### obtain product id from $transaction
