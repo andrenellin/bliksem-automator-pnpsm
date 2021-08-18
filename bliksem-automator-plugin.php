@@ -27,7 +27,7 @@ class Bliksem_Uncanny_Automator_Trigger
     public function load_triggers()
     {
         // Let's find integration by name so that trigger can be added it's list.
-        $add_to_integration = automator_get_integration_by_name('Uncanny Automator');
+        $add_to_integration = automator_get_integration_by_name('Memberpress');
         if (empty($add_to_integration)) {
             return null;
         }
