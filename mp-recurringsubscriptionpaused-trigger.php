@@ -67,6 +67,8 @@ class MP_RECURRINGSUBSCRIPTIONPAUSED_TRIGGER {
 		if ( 'lifetime' === (string) $product->period_type ) {
 			return false;
 		}
+		
+		return true;
 	}
 
 	/**
